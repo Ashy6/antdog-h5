@@ -1,0 +1,16 @@
+/**
+* App 组件样式
+*/
+@use './global.scss';
+@use './variable.scss'as var;
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
