@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import './scss/App.scss'
+import routes from './routes';
 
 function App() {
 
@@ -19,12 +22,17 @@ function App() {
 
   return (
     <div>
-      todo list
-      - UI 库：Ant Design Mobile
-      - https://mobile.ant.design/zh/components/
-
-      - 状态管理以及数据：ahooks
-      - https://ahooks.gitee.io/zh-CN/guide
+      <BrowserRouter>
+        <Routes>
+          {routes.map(({ path, Ele }, index) => (
+            <Route
+              key={index}
+              path={path}
+              element={<Ele />}
+            ></Route>
+          ))}
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
