@@ -10,10 +10,10 @@ export default function NavBarComponent({ type }: { type?: NavBarType }) {
     const state = useReactive({ navBarType: type || NavBarType.home })
     const [visible, setVisible] = useState(false)
 
-    const back = () => {
-        switch (type) {
+    const onNavBarClick = () => {
+        switch (state.navBarType) {
             case NavBarType.home:
-                // TODO：打开 Popup
+                // TODO：打开 Popup，该方法由事件回调出去外部实现交互
                 setVisible(true)
                 break;
 
@@ -33,7 +33,7 @@ export default function NavBarComponent({ type }: { type?: NavBarType }) {
                     state.navBarType === NavBarType.home ?
                         <UnorderedListOutline /> : <LeftOutline />
                 }
-                onBack={back}
+                onBack={onNavBarClick}
             >
                 <TitleComponent titleType={state.navBarType} />
             </NavBar>
