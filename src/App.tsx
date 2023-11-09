@@ -21,7 +21,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className='full-100'>
       <BrowserRouter>
         <Routes>
           {routes.map(({ path, Ele }, index) => (
