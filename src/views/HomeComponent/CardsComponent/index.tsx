@@ -2,7 +2,7 @@ import { useReactive } from 'ahooks'
 import CardItemComponent from '../CardItemComponent'
 
 export default function CardsListComponent() {
-    const cardsList = useReactive([mock[0], mock[0]])
+    const cardsList = useReactive([Mock[0], Mock[0]])
 
     return (
         <div className='home-container lists'>
@@ -13,7 +13,7 @@ export default function CardsListComponent() {
     )
 }
 
-export const mock = [
+export const Mock = [
     {
         title: 'Steam(Global)',
         describe:

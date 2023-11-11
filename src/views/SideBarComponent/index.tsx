@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Avatar, Popup } from 'antd-mobile'
+import { Popup } from 'antd-mobile'
 import { useNavigate } from 'react-router-dom'
-import { flagsIcon } from '../../assets/png'
+import UserComponent from '../../components/UserComponent'
 import menuPath from '../../routes/path'
 
 import './style.scss'
@@ -16,12 +16,6 @@ export default function SideBarComponent(props: SidebarProps) {
     const navigate = useNavigate()
 
     const [isLogin, setIsLogin] = useState(true)
-
-    const [userInfo, setUserInfo] = useState({
-        avatar: flagsIcon.CAD,
-        userName: 'KKKXXX',
-        balance: '987654321.98'
-    });
 
     const [menus, setMenus] = useState(MenusMock)
 
@@ -39,30 +33,7 @@ export default function SideBarComponent(props: SidebarProps) {
                     <div className='sidebar-container'>
                         {/* 用户 */}
                         <div className='sidebar-container-user'>
-                            <Avatar
-                                src={isLogin ? userInfo.avatar : ''}
-                                style={{ '--size': '42rem' }}
-                            />
-                            {isLogin ? (
-                                <div className='user'>
-                                    <div className='user-name'>
-                                        {userInfo.userName}
-                                    </div>
-                                    <div className='balance d-flex'>
-                                        <div className='number text-space-hidden'>
-                                            {userInfo.balance}
-                                        </div>
-                                        Points
-                                    </div>
-                                </div>
-                            ) : (
-                                <div
-                                    className='sidebar-item'
-                                    onClick={() => navigate(menuPath.LOGIN_PATH)}
-                                >
-                                    Login
-                                </div>
-                            )}
+                            <UserComponent isLogin={isLogin} />
                         </div>
 
                         {/* 菜单 */}
