@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Avatar } from 'antd-mobile'
+import { flagsIcon } from '../../assets/png'
 
 import './style.scss'
 
@@ -25,7 +26,7 @@ export default function FlagListComponent(props: RateProps) {
                             onClick={() => setActiveFlag(flagList[i])}
                         >
                             <Avatar
-                                src={img || ''}
+                                src={img || flagsIcon[flag || ''] || ''}
                                 style={{ '--size': '22rem' }}
                             />
                             <span className='flag-name'>{flag}</span>
