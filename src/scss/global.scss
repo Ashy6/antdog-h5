@@ -1,10 +1,19 @@
-@use './variable.scss' as var;
+@use './variable.scss'as var;
+
 /**
 * 通用样式封装
 */
 .full-100 {
     width: 100%;
     height: 100%;
+}
+
+// 主容器样式
+.full-container {
+    width: 100%;
+    height: calc(100% - var.$nav-height);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 // 全局按钮样式

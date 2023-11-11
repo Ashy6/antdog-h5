@@ -1,7 +1,7 @@
 @use '/src/scss/variable.scss' as var;
 
 .adm-nav-bar {
-    height: 55rem;
+    height: var.$nav-height;
 
     .adm-nav-bar-title {
         color: var.$primary;
