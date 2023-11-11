@@ -1,49 +1,47 @@
 import { ReactElement } from 'react'
-import { useReactive } from 'ahooks'
-import { NavBar, Toast } from 'antd-mobile'
+import { NavBar } from 'antd-mobile'
 import { LeftOutline, UnorderedListOutline } from 'antd-mobile-icons'
-import { NavBarType } from './type'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import TitleComponent from './TitleComponent'
+import HomeIcon from '../../assets/png/header-home.png'
+
+import { HOME_PATH } from '../../routes/path'
+import { titleMap } from './type'
+
+import './style.scss'
 
 interface NavBarProps {
-    type?: NavBarType
     children?: ReactElement
     sideBarOpenCallback?: () => void
 }
 export default function NavBarComponent(props: NavBarProps) {
-    const { type, children, sideBarOpenCallback } = props
+    const { children, sideBarOpenCallback } = props
 
-    const state = useReactive({ navBarType: type || NavBarType.home })
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const onNavBarClick = () => {
-        switch (state.navBarType) {
-            case NavBarType.home:
-                sideBarOpenCallback?.()
-                break
-
-            default:
-                Toast.show({
-                    content: '点击了返回区域',
-                    duration: 1000
-                })
-                break
+        if (isHome()) {
+            sideBarOpenCallback?.()
+        } else {
+            navigate(-1)
         }
     }
+
+    const isHome = () => location.pathname === HOME_PATH
 
     return (
         <>
             <NavBar
-                backArrow={
-                    state.navBarType === NavBarType.home ? (
-                        <UnorderedListOutline />
-                    ) : (
-                        <LeftOutline />
-                    )
-                }
+                backArrow={isHome() ? <UnorderedListOutline /> : <LeftOutline />}
                 onBack={onNavBarClick}
             >
-                <TitleComponent titleType={state.navBarType} />
+                {titleMap[location.pathname] || (
+                    <div
+                        className='title-home'
+                        style={{ backgroundImage: `url(${HomeIcon})` }}
+                    ></div>
+                )}
             </NavBar>
 
             {children}
