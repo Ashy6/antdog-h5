@@ -6,7 +6,7 @@ import { AntOutline, SoundOutline } from 'antd-mobile-icons'
 import { getCardList } from '../../api/card';
 import "./order.scss";
 
-export const OrderComponent = (props: { data: any }) => {
+export default function OrderComponent(props: { data: any }) {
 
     const whatappUrl = 'http://baidu.com';
 
