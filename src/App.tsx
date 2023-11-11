@@ -1,10 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import './scss/App.scss'
 import routes from './routes';
+import NavBarComponent from './components/NavBarComponent';
+import SideBarComponent from './views/SideBarComponent';
+
+import './scss/App.scss'
 
 function App() {
+  const [visible, setVisible] = useState<boolean>(false)
 
   useEffect(() => {
     /**
@@ -23,6 +27,13 @@ function App() {
   return (
     <div className='full-100'>
       <BrowserRouter>
+        <NavBarComponent sideBarOpenCallback={() => setVisible(true)}>
+          <SideBarComponent
+            visible={visible}
+            sideBarCloseCallback={() => setVisible(false)}
+          />
+        </NavBarComponent>
+
         <Routes>
           {routes.map(({ path, Ele }, index) => (
             <Route
