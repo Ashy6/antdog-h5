@@ -4,6 +4,7 @@ import routes from '../../routes'
 
 import SwiperComponent from './SwiperComponent'
 import TagsComponents from './TagsComponent'
+import CardsListComponent from './CardsComponent'
 
 import './style.scss'
 
@@ -14,10 +15,8 @@ export default function Home() {
         <div className='home-component full-container'>
             <SwiperComponent />
             <TagsComponents />
-            <div className='home-container list'>
+            <CardsListComponent />
 
-            </div>
-            首页
             {/* TODO：临时页面路由： */}
             {routes.map(item => (
                 <div key={item.path}>

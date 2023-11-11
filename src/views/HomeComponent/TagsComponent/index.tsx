@@ -1,3 +1,4 @@
+import { Avatar } from 'antd-mobile'
 import tagIcon from '../../../assets/home'
 
 const tags = [
@@ -20,7 +21,10 @@ const TagsComponents: React.FC = () => (
         <div className='home-container-tags'>
             {tags.map((tag, i) => (
                 <span key={i}>
-                    <img className='home-container-tags-img' src={tag.img} alt='' />
+                    <Avatar
+                        src={tag.img || ''}
+                        style={{ '--size': '20rem' }}
+                    />
                     {tag.title}
                 </span>
             ))}

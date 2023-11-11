@@ -1,7 +1,7 @@
 @use '/src//scss/variable.scss'as var;
 
 .rate-list {
-    padding-top: 8rem;
+    padding-top: 4rem;
 
     &-flag {
         flex: 1;
@@ -52,6 +52,10 @@
             justify-content: space-around;
             align-items: center;
             width: 220rem;
+
+            &:last-child {
+                margin-bottom: 8rem;
+            }
 
             .amount-info,
             .rate-info {

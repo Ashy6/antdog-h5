@@ -1,31 +1,31 @@
-@use '/src/scss/variable.scss' as var;
+@use '/src/scss/variable.scss'as var;
 
 .home-component {
-    .content {
-        height: 100%;
-        color: #ffffff;
-        background: #ffffff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 48px;
-        user-select: none;
-        border-radius: 8px;
-        overflow: hidden;
 
-        &-item {
-            width: 100%;
-            height: 100%;
-        }
-    }
-
+    // 轮播
     .adm-swiper-slide,
     .adm-swiper-slide-active {
         .content {
+            height: 100%;
+            color: #ffffff;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            user-select: none;
+            border-radius: 8px;
+            overflow: hidden;
             margin: 0 3rem;
+
+            &-item {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 
+    // 内容区域
     .home-container {
         padding: 0 12rem;
 
@@ -46,11 +46,64 @@
                 min-width: max-content;
             }
 
-            &-img {
-                width: 24rem;
+            .adm-image {
                 margin-right: 4rem;
-                border-radius: 50%;
             }
+        }
+    }
+
+    // 列表
+    .lists {
+        &-item {
+            margin-top: 12rem;
+            border-radius: 12rem;
+            box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.1);
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+                margin: 0rem 8rem;
+                padding: 8rem 0rem;
+                border-bottom: var.$border-b;
+
+                .describe {
+                    text-align: left;
+                    margin-right: 4rem;
+                    font-weight: 450;
+
+                    label {
+                        color: #c4731c;
+                        font-size: 15rem;
+                    }
+
+                    &-text {
+                        font-size: 10rem;
+                        margin: 4rem 0;
+                    }
+
+                    &-time {
+                        font-weight: 400;
+                        font-size: 10rem;
+                        color: #999;
+                    }
+                }
+
+                img {
+                    width: 40vw;
+                    height: 28vw;
+                    border-radius: 8rem;
+                }
+            }
+        }
+    }
+
+    .sell {
+        padding: 8rem;
+
+        &-btn {
+            color: #ffffff;
+            font-size: 18rem;
+            width: 82%;
         }
     }
 }
