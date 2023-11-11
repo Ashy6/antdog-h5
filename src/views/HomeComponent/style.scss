@@ -1,0 +1,56 @@
+@use '/src/scss/variable.scss' as var;
+
+.home-component {
+    .content {
+        height: 100%;
+        color: #ffffff;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 48px;
+        user-select: none;
+        border-radius: 8px;
+        overflow: hidden;
+
+        &-item {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .adm-swiper-slide,
+    .adm-swiper-slide-active {
+        .content {
+            margin: 0 3rem;
+        }
+    }
+
+    .home-container {
+        padding: 0 12rem;
+
+        &-tags {
+            height: 50rem;
+            font-size: 14rem;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            border-bottom: var.$border-b;
+
+            span {
+                display: flex;
+                align-items: center;
+                color: var.$primary;
+                padding: 12rem;
+                width: max-content;
+                min-width: max-content;
+            }
+
+            &-img {
+                width: 24rem;
+                margin-right: 4rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}

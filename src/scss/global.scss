@@ -1,3 +1,5 @@
+@use './variable.scss'as var;
+
 /**
 * 通用样式封装
 */
@@ -30,6 +32,34 @@
     padding-left: 12rem;
 }
 
-.pr-12 {
-    padding-right: 12rem;
+// 主容器样式
+.full-container {
+    width: 100%;
+    height: calc(100% - var.$nav-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+// 全局按钮样式
+.antdog-btn {
+    background-color: var.$primary;
+    font-weight: 700;
+
+    &:not(:disabled):hover {
+        background-color: #0bcfd6c7 !important;
+    }
+
+    &.disabled {
+        color: #fff;
+        background-color: #a0a0a0;
+    }
+
+    &.processing {
+        color: #fff;
+        background-color: #1f6dfd;
+    }
+
+    &:not(:first-child) {
+        margin-left: 8px;
+    }
 }
