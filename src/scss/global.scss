@@ -8,6 +8,30 @@
     height: 100%;
 }
 
+:root:root {
+    --adm-avatar-border-radius: 50%;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.pl-12 {
+    padding-left: 12rem;
+}
+
 // 主容器样式
 .full-container {
     width: 100%;
