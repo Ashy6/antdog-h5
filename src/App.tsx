@@ -14,7 +14,7 @@ function App() {
     const WIDTH = 750;
     const setView = () => {
       document.documentElement.style.fontSize =
-        (10 * screen.width) / WIDTH + "px";
+        (2 * screen.width) / WIDTH + "px";
     };
     window.onorientationchange = setView;
     setView();
