@@ -3,7 +3,7 @@ import { NavBar } from 'antd-mobile'
 import { LeftOutline, UnorderedListOutline } from 'antd-mobile-icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import HomeIcon from '../../assets/png/header-home.png'
+import HeaderIcon from '../../assets/header/title-bg.png'
 
 import { HOME_PATH } from '../../routes/path'
 import { titleMap } from './type'
@@ -39,7 +39,7 @@ export default function NavBarComponent(props: NavBarProps) {
                 {titleMap[location.pathname] || (
                     <div
                         className='title-home'
-                        style={{ backgroundImage: `url(${HomeIcon})` }}
+                        style={{ backgroundImage: `url(${HeaderIcon})` }}
                     ></div>
                 )}
             </NavBar>
