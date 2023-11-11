@@ -1,5 +1,4 @@
-import tagIcon from '../../assets/home'
-import './style.scss'
+import tagIcon from '../../../assets/home'
 
 const tags = [
     {

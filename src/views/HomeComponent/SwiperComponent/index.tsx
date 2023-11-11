@@ -1,7 +1,5 @@
 import { Swiper } from 'antd-mobile'
 
-import './style.scss'
-
 const colors = ['#ace0ff', '#bcffbd', '#e4fabd', '#ffcfac']
 
 const SwiperItem = colors.map((color, index) => (
