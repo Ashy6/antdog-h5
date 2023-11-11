@@ -1,6 +1,7 @@
 import HomeComponent from '../views/HomeComponent'
 import OrderComponent from '../views/OrderComponent'
 import WithdrawComponent from '../views/WithdrawComponent'
+import WithdrawDetailsComponent from '../views/WithdrawDetailsComponent'
 
 import {
   CLOSE_ACCOUNT_PATH,
@@ -66,7 +67,7 @@ const routes: RootRoutes[] = [
   {
     name: '提现详情',
     path: WITHDRAW_DEPOSIT_DETAIL_PATH,
-    Ele: HomeComponent
+    Ele: WithdrawDetailsComponent
   },
   {
     name: '订单管理',
