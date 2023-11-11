@@ -1,0 +1,15 @@
+.withdraw-container {
+    text-align: left;
+
+    .withdraw {
+        width: 100%;
+        padding: 8rem 0;
+        display: flex;
+        
+        &-btn {
+            margin: 0 auto;
+            font-size: 18rem;
+            width: 82%;
+        }
+    }
+}
