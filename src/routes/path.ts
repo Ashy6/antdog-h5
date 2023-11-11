@@ -1,4 +1,3 @@
-
 /**
  * 主页
  */
@@ -39,3 +38,16 @@ export const WITHDRAW_DEPOSIT_DETAIL_PATH = '/withdraw-deposit-detail'
  * 订单管理
  */
 export const ORDER_LIST_PATH = '/order-list'
+
+export default {
+  HOME_PATH,
+  LOGIN_PATH,
+  REGISTER_PATH,
+  FORGET_PASSWORD_PATH,
+  CLOSE_ACCOUNT_PATH,
+  ORDER_PATH,
+  ORDER_DETAIL_PATH,
+  WITHDRAW_DEPOSIT_PATH,
+  WITHDRAW_DEPOSIT_DETAIL_PATH,
+  ORDER_LIST_PATH
+}

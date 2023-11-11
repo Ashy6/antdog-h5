@@ -1,0 +1,50 @@
+.sidebar {
+    text-align: center;
+    font-size: 15rem;
+    font-weight: 500;
+
+    .sidebar-container {
+        height: 80%;
+
+        &-user {
+            display: flex;
+            align-items: center;
+            margin-top: 30rem;
+
+            .adm-image {
+                margin-left: 12rem;
+            }
+
+            .user {
+                text-align: left;
+                font-size: 14rem;
+
+                .balance {
+                    color: #f19e26;
+
+                    .number {
+                        margin-right: 4rem;
+                        max-width: 95rem;
+                    }
+                }
+
+                &-name,
+                .balance {
+                    transform: rotateY(36deg);
+                }
+            }
+        }
+    }
+
+    &-item,
+    &-container-deregister {
+        cursor: pointer;
+        padding: 12rem;
+        margin: 12rem 0;
+
+        &.focus-it:hover,
+        &.focus-it.is-active {
+            background: #e4e4e4;
+        }
+    }
+}

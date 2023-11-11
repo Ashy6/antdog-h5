@@ -1,27 +1,133 @@
-import { Popup } from 'antd-mobile'
+import { useState } from 'react'
+import { Avatar, Popup } from 'antd-mobile'
+import { useNavigate } from 'react-router-dom'
+import { flagsIcon } from '../../assets/png'
+import menuPath from '../../routes/path'
+
+import './style.scss'
 
 interface SidebarProps {
     visible: boolean
     sideBarCloseCallback: () => void
 }
-export default function SideBarComponent({ visible, sideBarCloseCallback }: SidebarProps) {
+export default function SideBarComponent(props: SidebarProps) {
+    const { visible, sideBarCloseCallback } = props
+
+    const navigate = useNavigate()
+
+    const [isLogin, setIsLogin] = useState(true)
+
+    const [userInfo, setUserInfo] = useState({
+        avatar: flagsIcon.CAD,
+        userName: 'KKKXXX',
+        balance: '987654321.98'
+    });
+
+    const [menus, setMenus] = useState(MenusMock)
+
     return (
         <>
-            {/* TODO：容器实现，SideBar 组件在 view 中实现，NavBar 用作容器使用 */}
             <Popup
                 visible={visible}
                 onMaskClick={() => {
                     sideBarCloseCallback()
                 }}
                 position='left'
-                bodyStyle={{ width: '48vw' }}
+                bodyStyle={{ width: '50vw' }}
             >
-                侧边栏组件
-                <p>1. 控制登录登出的逻辑</p>
-                <p>2. 控制注册的逻辑</p>
-                <p>3. 控制注销的逻辑</p>
-                登录用户信息列表页
+                <div className='sidebar full-100'>
+                    <div className='sidebar-container'>
+                        {/* 用户 */}
+                        <div className='sidebar-container-user'>
+                            <Avatar
+                                src={isLogin ? userInfo.avatar : ''}
+                                style={{ '--size': '42rem' }}
+                            />
+                            {isLogin ? (
+                                <div className='user'>
+                                    <div className='user-name'>
+                                        {userInfo.userName}
+                                    </div>
+                                    <div className='balance d-flex'>
+                                        <div className='number text-space-hidden'>
+                                            {userInfo.balance}
+                                        </div>
+                                        Points
+                                    </div>
+                                </div>
+                            ) : (
+                                <div
+                                    className='sidebar-item'
+                                    onClick={() => navigate(menuPath.LOGIN_PATH)}
+                                >
+                                    Login
+                                </div>
+                            )}
+                        </div>
+
+                        {/* 菜单 */}
+                        {menus.map((menu, i) => (
+                            <div
+                                className={`sidebar-item focus-it ${menu.isActive && 'is-active'}`}
+                                key={i}
+                                onClick={() => navigate(menu.path)}
+                            >
+                                {menu.label}
+                            </div>
+                        ))}
+
+                        {/* 退出 */}
+                        {isLogin && (
+                            <div
+                                className='sidebar-item'
+                                onClick={() => {
+                                    navigate(menuPath.HOME_PATH)
+                                    setIsLogin(false)
+                                }}
+                            >
+                                Logout
+                            </div>
+                        )}
+                    </div>
+                    {/* 注销 */}
+                    {isLogin && (
+                        <div
+                            className='sidebar-container-deregister'
+                            onClick={() => navigate(menuPath.CLOSE_ACCOUNT_PATH)}
+                        >
+                            Deregister
+                        </div>
+                    )}
+                </div>
             </Popup>
         </>
     )
 }
+
+export const MenusMock = [
+    {
+        label: 'Withdraw',
+        path: menuPath.WITHDRAW_DEPOSIT_PATH,
+        isActive: false
+    },
+    {
+        label: 'Order History',
+        path: menuPath.ORDER_LIST_PATH,
+        isActive: false
+    },
+    {
+        label: 'Blog',
+        path: '', // TODO： 用户点击进入博客链接
+        isActive: false
+    },
+    {
+        label: 'Help',
+        path: '', // TODO： 用户点击进入帮助链接内容
+        isActive: false
+    },
+    {
+        label: 'Custormer Support',
+        path: '', // TODO：用户点击跳转 Whatsapp 客服
+        isActive: false
+    }
+]

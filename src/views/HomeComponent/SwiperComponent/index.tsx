@@ -34,7 +34,7 @@ export default function SwiperComponent() {
         stuckAtBoundary={false}
         // 切换时触发
         onIndexChange={i => {
-            console.log(i, 'onIndexChange1')
+            // console.log(i, 'onIndexChange1')
         }}
     >
         {SwiperItem}
