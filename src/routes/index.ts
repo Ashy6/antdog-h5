@@ -1,4 +1,5 @@
 import HomeComponent from '../views/HomeComponent'
+import { OrderComponent } from '../views/Order'
 import {
   CLOSE_ACCOUNT_PATH,
   FORGET_PASSWORD_PATH,
@@ -47,7 +48,7 @@ const routes: RootRoutes[] = [
   {
     name: '礼品卡下单',
     path: ORDER_PATH,
-    Ele: HomeComponent
+    Ele: OrderComponent as any
   },
   {
     name: '订单详情',
