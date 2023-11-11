@@ -1,5 +1,5 @@
 import HomeComponent from '../views/HomeComponent'
-import OrderComponent from '../views/OrderComponent/index'
+import OrderComponent from '../views/OrderComponent'
 import {
   CLOSE_ACCOUNT_PATH,
   FORGET_PASSWORD_PATH,
@@ -16,7 +16,8 @@ import {
 interface RootRoutes {
   name: string
   path: string
-  Ele: () => JSX.Element
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Ele: (props: any) => JSX.Element
 }
 
 const routes: RootRoutes[] = [
