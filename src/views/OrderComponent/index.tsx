@@ -3,8 +3,9 @@ import { Avatar, Image, Divider, } from 'antd-mobile';
 import messageIcon from '../../assets/png/message.png';
 import { AntOutline, SoundOutline } from 'antd-mobile-icons'
 
-import "./order.scss";
 import { getCardList } from '../../api/card';
+import "./order.scss";
+
 export const OrderComponent = (props: { data: any }) => {
 
     const whatappUrl = 'http://baidu.com';
