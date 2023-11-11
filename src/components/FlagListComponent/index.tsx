@@ -26,7 +26,7 @@ export default function FlagListComponent(props: RateProps) {
                         >
                             <Avatar
                                 src={img || ''}
-                                style={{ '--size': '24rem' }}
+                                style={{ '--size': '22rem' }}
                             />
                             <span className='flag-name'>{flag}</span>
                         </div>
@@ -34,14 +34,14 @@ export default function FlagListComponent(props: RateProps) {
                 </div>
 
                 <div className='rate-list-info'>
-                    <div className='rate-title'>
+                    <div className='rate-title info-list'>
                         <div className='amount-info'>Amount</div>
                         <div className='rate-info'>Rate</div>
                     </div>
                     {(activeFlag.rateList || []).map(({ amount, rate }, i) => (
-                        <div className='rate-item' key={`rate-${i}`}>
-                            <div className='amount-info'>{amount}</div>
-                            <div className='rate-info'>{rate}</div>
+                        <div className='rate-item info-list' key={`rate-${i}`}>
+                            <div className='amount-info text-space-hidden'>{amount}</div>
+                            <div className='rate-info text-space-hidden'>{rate}</div>
                         </div>
                     ))}
                 </div>

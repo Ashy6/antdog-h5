@@ -32,6 +32,14 @@
     padding-left: 12rem;
 }
 
+// 文字超出隐藏
+.text-space-hidden {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  
+}
+
 // 主容器样式
 .full-container {
     width: 100%;

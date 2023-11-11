@@ -1,24 +1,31 @@
+@use '/src//scss/variable.scss'as var;
+
 .rate-list {
-    border: 1px solid red;
     padding-top: 8rem;
+
     &-flag {
         flex: 1;
 
         .flag-info {
             width: 70rem;
-            padding: 2rem 4rem;
-            margin: 4rem auto;
+            padding: 4rem 8rem;
+            margin: 4rem auto 12rem auto;
             border-radius: 8rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid red;
+            cursor: pointer;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
             .flag-name {
                 font-size: 15rem;
                 margin-left: 8rem;
-                font-weight: 600;
+                font-weight: 500;
                 min-width: max-content;
+            }
+
+            &:not(.is-active):hover {
+                background: #b2cafba1;
             }
 
             &.is-active {
@@ -29,5 +36,30 @@
 
     &-info {
         flex: 2;
+
+        .rate-title {
+            font-size: 15rem;
+            font-weight: 500;
+        }
+
+        .rate-item {
+            font-size: 12rem;
+            color: #8c8c8c;
+        }
+
+        .info-list {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 220rem;
+
+            .amount-info,
+            .rate-info {
+                padding: 6rem 0;
+                width: 90rem;
+                min-width: max-content;
+                border-bottom: var.$border-b;
+            }
+        }
     }
 }
