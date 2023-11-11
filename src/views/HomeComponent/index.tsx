@@ -27,7 +27,7 @@ export default function Home() {
         <div className='home-component full-100'>
             <Swiper
                 style={{
-                    '--height': '250rem'
+                    '--height': '210rem'
                 }}
                 slideSize={88}
                 trackOffset={6}

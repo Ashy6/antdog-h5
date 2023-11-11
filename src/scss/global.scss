@@ -1,7 +1,32 @@
+@use './variable.scss' as var;
 /**
 * 通用样式封装
 */
 .full-100 {
     width: 100%;
     height: 100%;
+}
+
+// 全局按钮样式
+.antdog-btn {
+    background-color: var.$primary;
+    font-weight: 700;
+
+    &:not(:disabled):hover {
+        background-color: #0bcfd6c7 !important;
+    }
+
+    &.disabled {
+        color: #fff;
+        background-color: #a0a0a0;
+    }
+
+    &.processing {
+        color: #fff;
+        background-color: #1f6dfd;
+    }
+
+    &:not(:first-child) {
+        margin-left: 8px;
+    }
 }
