@@ -1,4 +1,4 @@
-import tagIcon from '../../assets/home'
+import tagIcon from '../../../assets/home'
 import './style.scss'
 
 const tags = [
