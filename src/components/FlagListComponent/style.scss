@@ -1,0 +1,33 @@
+.rate-list {
+    border: 1px solid red;
+    padding-top: 8rem;
+    &-flag {
+        flex: 1;
+
+        .flag-info {
+            width: 70rem;
+            padding: 2rem 4rem;
+            margin: 4rem auto;
+            border-radius: 8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+
+            .flag-name {
+                font-size: 15rem;
+                margin-left: 8rem;
+                font-weight: 600;
+                min-width: max-content;
+            }
+
+            &.is-active {
+                background: #b2cafb;
+            }
+        }
+    }
+
+    &-info {
+        flex: 2;
+    }
+}
