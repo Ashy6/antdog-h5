@@ -1,1 +1,102 @@
+@use '/src/scss/variable.scss' as var;
 
+.order {
+    .scroll-container {
+        margin-bottom: 76rem;
+    }
+
+    .adm-list {
+        --border-inner: none;
+        --border-bottom: none;
+        --border-top: none;
+        --active-background-color: #adc6ff;
+
+        .adm-list-item-content-main {
+            display: flex;
+            align-items: center;
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+
+        .adm-list-item {
+            border-radius: 14px;
+            margin-bottom: 6rem;
+
+            &.selected-menu {
+                background-color: #adc6ff;
+            }
+        }
+    }
+
+    .adm-card {
+        padding: 0;
+        width: 100%;
+
+        .adm-image-uploader-cell {
+            width: 96rem;
+            height: 120rem;
+
+            .adm-image-uploader-upload-button-icon {
+                line-height: 120rem;
+                font-size: 40rem;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .more-btn {
+        width: 50%;
+        margin: 0 auto;
+        color: rgba($color: #ff8f1f, $alpha: 0.8);
+        font-size: 16rem;
+        display: flex;
+        align-items: center;
+        margin-top: 8rem;
+
+        .plus-btn {
+            display: inline-flex;
+            color: white;
+            background-color: rgba($color: #ff8f1f, $alpha: 0.6);
+            align-items: center;
+            justify-content: center;
+            height: 20rem;
+            width: 20rem;
+            padding: 2rem;
+            border-radius: 50%;
+            margin-right: 8rem;
+            font-size: 18rem;
+            font-weight: bold;
+        }
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        background-color: white;
+        left: 0;
+
+        .submit-btn {
+            margin: 0 auto;
+            position: relative;
+            height: 30rem;
+            background-color: var.$primary;
+            border-radius: 8px;
+            margin-top: 12rem;
+            margin-bottom: 12rem;
+            padding: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20rem;
+            width: 80%;
+        }
+
+        .adm-divider-vertical {
+            height: 1.2em;
+        }
+
+        .calc-submit-btn {}
+    }
+}

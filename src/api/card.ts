@@ -10,3 +10,30 @@ export function getCardList(page = 1) {
         }
     })
 }
+/* 
+| userId | string | 是 | 接收人 |
+| --- | --- | --- | --- |
+| advCode | string | 是 | 广告code |
+| cardNo | string | 是 | 改礼品卡编号 |
+| goodsList | Array | 是 | 卡列表 |
+| faceValue | number | 是 | 面值 |
+| name | string | 否 | 名称 |
+| memo | string | 否 | 备注信息 |
+| goodsNo | string | 否 | 卡号 |
+| goodsPass | string | 否 | 卡密 |
+| images | Array | 是 | 图片 |
+*/
+export function confirmOrder(data: Record<string, unknown>) {
+    return instance({
+        url: `${API_PREFIX}/order/confirmOrder`,
+        method: 'post',
+        data: data
+    });
+}
+
+export function submitOrder(orderNo: string) {
+    return instance({
+        url: `${API_PREFIX}/card/submit?orderNo=${orderNo}`,
+        method: 'get',
+    });
+}

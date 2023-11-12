@@ -1,4 +1,4 @@
-@use './variable.scss'as var;
+@use './variable.scss' as var;
 
 /**
 * 通用样式封装
@@ -12,8 +12,20 @@
     --adm-avatar-border-radius: 50%;
 }
 
+body {
+    margin: 0;
+}
+
 .text-align-left {
     text-align: left;
+}
+
+.d-inline {
+    display: inline;
+}
+
+.d-inline-block {
+    display: inline-block;
 }
 
 .d-flex {
@@ -24,12 +36,69 @@
     justify-content: space-between;
 }
 
+.justify-content-evenly {
+    justify-content: space-evenly;
+}
+
+.justify-content-around {
+    justify-content: space-around;
+}
+
 .align-items-center {
     align-items: center;
 }
 
 .pl-12 {
     padding-left: 12rem;
+}
+
+.pr-12 {
+    padding-right: 12rem;
+}
+
+.pl-4 {
+    padding-left: 4rem;
+}
+
+.pl-8 {
+    padding-left: 8rem;
+}
+
+.pr-8 {
+    padding-right: 8rem;
+}
+
+.pl-20 {
+    padding-left: 20rem;
+}
+
+.pr-20 {
+    padding-right: 20rem;
+}
+
+.mr-20 {
+    margin-right: 20rem;
+}
+
+.mr-4 {
+    margin-right: 4rem;
+}
+
+.mb-4 {
+    margin-bottom: 4rem;
+}
+
+.mb-8 {
+    margin-bottom: 8rem;
+}
+
+
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.required {
+    color: red;
 }
 
 // 文字超出隐藏
