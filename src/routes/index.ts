@@ -2,6 +2,10 @@ import HomeComponent from '../views/HomeComponent'
 import OrderComponent from '../views/OrderComponent'
 import WithdrawComponent from '../views/WithdrawComponent'
 import WithdrawDetailsComponent from '../views/WithdrawDetailsComponent'
+import DeregisterComponent from '../views/users/DeregisterComponent'
+import ForgetComponent from '../views/users/ForgetComponent'
+import LoginComponent from '../views/users/LoginComponent'
+import RegisterComponent from '../views/users/RegisterComponent'
 
 import {
   CLOSE_ACCOUNT_PATH,
@@ -32,22 +36,22 @@ const routes: RootRoutes[] = [
   {
     name: '登录',
     path: LOGIN_PATH,
-    Ele: HomeComponent
+    Ele: LoginComponent
   },
   {
     name: '注册',
     path: REGISTER_PATH,
-    Ele: HomeComponent
+    Ele: RegisterComponent
   },
   {
     name: '忘记密码',
     path: FORGET_PASSWORD_PATH,
-    Ele: HomeComponent
+    Ele: ForgetComponent
   },
   {
     name: '注销账户',
     path: CLOSE_ACCOUNT_PATH,
-    Ele: HomeComponent
+    Ele: DeregisterComponent
   },
   {
     name: '礼品卡下单',
