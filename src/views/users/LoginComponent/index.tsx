@@ -2,8 +2,12 @@ import { useState } from 'react'
 import { Button, Form, Input } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 import { useNavigate } from 'react-router-dom'
-import { FORGET_PASSWORD_PATH, HOME_PATH, REGISTER_PATH } from '../../../routes/path'
-import { LoginParams, login } from '../../../api/util'
+import {
+    FORGET_PASSWORD_PATH,
+    HOME_PATH,
+    REGISTER_PATH
+} from '../../../routes/path'
+import { LoginParams, login } from '../../../api/login'
 
 import '../style.scss'
 
@@ -23,13 +27,13 @@ export default function LoginComponent() {
 
     return (
         <>
-            <div className='user-title'>
+            <div className='user-title border'>
                 <p>Hello,Welcome to Antdog</p>
             </div>
             <div>
                 <p>Login by email</p>
             </div>
-            <div className='user-form-card'>
+            <div className='user-form-card border'>
                 <Form
                     className='text-align-left'
                     layout='vertical'
@@ -46,13 +50,17 @@ export default function LoginComponent() {
                         </Button>
                     }
                 >
-                    <Form.Item label='email' name='mail' rules={[{ required: true }]}>
+                    <Form.Item
+                        label='email'
+                        name='mail'
+                        rules={[{ required: true, message: 'Please enter email address' }]}
+                    >
                         <Input placeholder='Please enter email address' clearable />
                     </Form.Item>
                     <Form.Item
                         label='password'
                         name='password'
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please enter password' }]}
                         extra={
                             <div className={'eye'}>
                                 {!visible ? (
@@ -71,8 +79,16 @@ export default function LoginComponent() {
                     </Form.Item>
                 </Form>
                 <div className='user-bottom d-flex justify-content-between align-items-center'>
-                    <div className='cursor-pointer' onClick={() => navigate(REGISTER_PATH)}>Sign up</div>
-                    <div className='cursor-pointer' onClick={() => navigate(FORGET_PASSWORD_PATH)}>
+                    <div
+                        className='cursor-pointer px-2-y-1 '
+                        onClick={() => navigate(REGISTER_PATH)}
+                    >
+                        Sign up
+                    </div>
+                    <div
+                        className='cursor-pointer px-2-y-1 '
+                        onClick={() => navigate(FORGET_PASSWORD_PATH)}
+                    >
                         Forget Password
                     </div>
                 </div>

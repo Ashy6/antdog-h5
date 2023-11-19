@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { Codes } from './code';
+import { login } from './login';
 
 // export const API_URL = 'https://www.bee456.com'
 // export const API_URL = 'https://2167d872c4.zicp.fun'
@@ -23,19 +24,6 @@ instance.interceptors.request.use(async (config: any) => {
     }
     return config
 })
-
-export interface LoginParams {
-    mail: string
-    password: string
-}
-
-export const login = (options: LoginParams): Promise<RequestDate> => {
-    return instance({
-        url: `${API_PREFIX}/user/login`,
-        method: 'post',
-        data: options
-    })
-}
 
 // 添加响应拦截器
 instance.interceptors.response.use(
