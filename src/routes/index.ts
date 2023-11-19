@@ -1,5 +1,6 @@
 import HomeComponent from '../views/HomeComponent'
 import OrderComponent from '../views/OrderComponent'
+import { OrderDetailComponent } from '../views/OrderComponent/OrderDetailComponent'
 import WithdrawComponent from '../views/WithdrawComponent'
 import WithdrawDetailsComponent from '../views/WithdrawDetailsComponent'
 import DeregisterComponent from '../views/users/DeregisterComponent'
@@ -61,7 +62,7 @@ const routes: RootRoutes[] = [
   {
     name: '订单详情',
     path: ORDER_DETAIL_PATH,
-    Ele: HomeComponent
+    Ele: OrderDetailComponent
   },
   {
     name: '提现下单',

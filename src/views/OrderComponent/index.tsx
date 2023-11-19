@@ -14,6 +14,8 @@ import { confirmOrder, getCardList, submitOrder } from '../../api/card';
 import { idCreator } from '../../utils';
 
 import "./order.scss";
+import { useNavigate } from 'react-router-dom';
+import { ORDER_DETAIL_PATH } from '../../routes/path';
 
 
 async function uploadHandle(file: File) {
@@ -196,47 +198,51 @@ export default function OrderComponent(props: { data: any }) {
     | images | Array | 是 | 图片 |
     */
     const calcOrder = () => {
-        confirmOrder({
-            "userId": 0,
-            "productId": 0,
-            "rate": 0.00,
-            "goodsList": [
-                {
-                    "faceValue": 20.00,
-                    "finalAmount": 0.00,
-                    "name": "name_c020fddea94f",
-                    "memo": "memo_4194ad4bf40b",
-                    "goodsNo": "goodsNo_d77b020e8e7e",
-                    "goodsPass": "goodsPass_adc4c541d179",
-                    "goodsType": "goodsType_99fd24edb8b7",
-                    "images": [
-                        "images_f236f3bf482e"
-                    ]
-                },
-                {
-                    "faceValue": 20.00,
-                    "finalAmount": 0.00,
-                    "name": "name_c020fddea94f",
-                    "memo": "memo_4194ad4bf40b",
-                    "goodsNo": "goodsNo_d77b020e8e7e",
-                    "goodsPass": "goodsPass_adc4c541d179",
-                    "goodsType": "goodsType_99fd24edb8b7",
-                    "images": [
-                        "images_f236f3bf482e"
-                    ]
-                }
-            ],
-            "advCode": "Steam",
-            "cardNo": "1"
-        }).then(response => {
-            console.log(response);
-        });
+        setCanSubmit(true);
+        // confirmOrder({
+        //     "userId": 0,
+        //     "productId": 0,
+        //     "rate": 0.00,
+        //     "goodsList": [
+        //         {
+        //             "faceValue": 20.00,
+        //             "finalAmount": 0.00,
+        //             "name": "name_c020fddea94f",
+        //             "memo": "memo_4194ad4bf40b",
+        //             "goodsNo": "goodsNo_d77b020e8e7e",
+        //             "goodsPass": "goodsPass_adc4c541d179",
+        //             "goodsType": "goodsType_99fd24edb8b7",
+        //             "images": [
+        //                 "images_f236f3bf482e"
+        //             ]
+        //         },
+        //         {
+        //             "faceValue": 20.00,
+        //             "finalAmount": 0.00,
+        //             "name": "name_c020fddea94f",
+        //             "memo": "memo_4194ad4bf40b",
+        //             "goodsNo": "goodsNo_d77b020e8e7e",
+        //             "goodsPass": "goodsPass_adc4c541d179",
+        //             "goodsType": "goodsType_99fd24edb8b7",
+        //             "images": [
+        //                 "images_f236f3bf482e"
+        //             ]
+        //         }
+        //     ],
+        //     "advCode": "Steam",
+        //     "cardNo": "1"
+        // }).then(response => {
+        //     console.log(response);
+        // });
     }
 
+    const navigate = useNavigate();
+
     const submit = () => {
-        submitOrder('C921198938706808832').then(response => {
-            console.log(response);
-        })
+        // submitOrder('C921198938706808832').then(response => {
+        //     console.log(response);
+        // });
+        navigate(ORDER_DETAIL_PATH);
     }
 
     return <div className='order full-container'>
@@ -357,7 +363,7 @@ export default function OrderComponent(props: { data: any }) {
                     <div className='submit-btn' onClick={() => calcOrder()}>
                         Submit
                     </div> :
-                    <div className='submit-btn d-flex' onClick={() => calcOrder()}>
+                    <div className='submit-btn d-flex'>
                         <div style={{ fontSize: '14rem' }}>Earn 987654321.98 Points≈987654321.98 NGN</div>
                         <Divider direction='vertical' />
                         <div className='pr-3' onClick={() => submit()}>Submit</div>
