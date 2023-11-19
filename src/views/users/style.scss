@@ -1,3 +1,30 @@
+@use '../../scss/variable.scss'as var;
+
+.user-title {
+    font-size: 18rem;
+    color: var.$primary;
+    border-bottom: var.$border-b;
+    margin: 40rem 16rem;
+}
+
+.user-form-card {
+    margin: 16rem 8rem;
+    padding: 20rem 0;
+    border-radius: 8rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.user-bottom {
+    font-size: 16rem;
+    font-weight: 600;
+    padding: 0 16rem;
+}
+
 .eye {
     padding: 4rem;
     cursor: pointer;
@@ -6,4 +33,19 @@
         display: block;
         font-size: var(--adm-font-size-7);
     }
+}
+
+// antd 样式复写：
+.adm-list-body {
+    border: 0 !important;
+}
+
+.adm-list-item-content {
+    border: 0;
+    border-bottom: 2px solid #565656;
+    padding: 0;
+}
+
+.adm-list-item {
+    padding: 0 16rem;
 }

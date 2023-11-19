@@ -8,6 +8,10 @@
     height: 100%;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 :root:root {
     --adm-avatar-border-radius: 50%;
 }
@@ -144,6 +148,8 @@ body {
     }
 
     &.full {
-        width: 80%;
+        width: 94%;
+        border: 0;
+        margin: 0 auto;
     }
 }
