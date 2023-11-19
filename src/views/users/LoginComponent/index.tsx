@@ -7,7 +7,7 @@ import {
     HOME_PATH,
     REGISTER_PATH
 } from '../../../routes/path'
-import { LoginParams, login } from '../../../api/login'
+import { LoginParams, login } from '../../../api/user'
 
 import '../style.scss'
 

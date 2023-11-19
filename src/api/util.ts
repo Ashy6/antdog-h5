@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { Codes } from './code';
-import { login } from './login';
+import { login } from './user';
 
 // export const API_URL = 'https://www.bee456.com'
 // export const API_URL = 'https://2167d872c4.zicp.fun'

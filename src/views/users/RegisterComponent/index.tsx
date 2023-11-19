@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form, Input } from 'antd-mobile'
 import { LOGIN_PATH } from '../../../routes/path'
-import { RegisterParams, register } from '../../../api/login'
+import { RegisterParams, register } from '../../../api/user'
 
 import '../style.scss'
 
