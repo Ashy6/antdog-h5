@@ -242,7 +242,7 @@ export default function OrderComponent(props: { data: any }) {
     return <div className='order full-container'>
 
         <div className='scroll-container'>
-            <div className='d-flex justify-content-between  pl-12 pr-12'>
+            <div className='d-flex justify-content-between  pl-3 pr-3'>
                 <div className='d-flex align-items-center'>
                     <div>
                         <Avatar src={avatar} />
@@ -258,7 +258,7 @@ export default function OrderComponent(props: { data: any }) {
                 </div>
             </div>
             <Divider />
-            <div className='pl-20 pr-20'>
+            <div className='pl-5 pr-5'>
                 <div className='d-flex' style={{ fontWeight: 'bold', paddingBottom: '4rem' }}>
                     <div style={{ color: '#2f54eb', marginRight: '8rem' }}><SoundOutline style={{ marginRight: '2rem' }} /><span style={{ fontSize: '13rem' }}>Notice</span></div>
                     <div style={{ color: '#fa8c16' }}>1 Point{rate}NGN(Current quotes)</div>
@@ -275,10 +275,10 @@ export default function OrderComponent(props: { data: any }) {
                     cards.map((card, idx) => {
                         return <div className='d-flex' key={card.key}>
                             <Card onClick={() => { null }}>
-                                {idx > 0 && <div className='close-btn mr-4' style={{ textAlign: 'right', fontSize: '20rem', height: '20rem' }} onClick={() => deleteCard(card.key)}>
+                                {idx > 0 && <div className='close-btn mr-1' style={{ textAlign: 'right', fontSize: '20rem', height: '20rem' }} onClick={() => deleteCard(card.key)}>
                                     <CloseCircleFill />
                                 </div>}
-                                <div className='d-flex justify-content-around mb-8'>
+                                <div className='d-flex justify-content-around mb-2'>
                                     <div>
                                         <ImageUploader
                                             value={cardFrontFileList}
@@ -286,7 +286,7 @@ export default function OrderComponent(props: { data: any }) {
                                             onChange={setCardFrontFileList}
                                             upload={uploadHandle as any}
                                         />
-                                        <div className='mt-4'>
+                                        <div className='mt-1'>
                                             <span className='required'>*</span>Card Front
                                         </div>
                                     </div>
@@ -297,7 +297,7 @@ export default function OrderComponent(props: { data: any }) {
                                             onChange={setCardBackFileList}
                                             upload={uploadHandle as any}
                                         />
-                                        <div className='mt-4'>
+                                        <div className='mt-1'>
                                             <span className='required'>*</span>Card Back
                                         </div>
                                     </div>
@@ -308,35 +308,35 @@ export default function OrderComponent(props: { data: any }) {
                                             onChange={setReceiptFileList}
                                             upload={uploadHandle as any}
                                         />
-                                        <div className='mt-4'>
+                                        <div className='mt-1'>
                                             <span className='required'>*</span>Receipt
                                         </div>
                                     </div>
                                 </div>
-                                <div className='d-flex justify-content-around pl-8 pr-8'>
+                                <div className='d-flex justify-content-around pl-2 pr-2'>
                                     <div style={{ width: '20%' }}>
                                         <Input
                                             placeholder='100'
-                                            className='pl-8'
+                                            className='pl-2'
                                             style={{ border: '1px solid #d9d9d9', borderRadius: '8px' }}
                                             type='number'
                                             value={card.amount}
                                             onChange={value => { propChange(card.key, 'amount', value) }}
                                         />
-                                        <div className='mt-4 pl-4 text-align-left'>
+                                        <div className='mt-1 pl-1 text-align-left'>
                                             <span className='required'>*</span>Amount
                                         </div>
                                     </div>
-                                    <div className='pr-8' style={{ width: '65%' }}>
+                                    <div className='pr-2' style={{ width: '65%' }}>
                                         <Input
                                             placeholder='377935542715729 05/31 6207'
-                                            className='pl-8'
+                                            className='pl-2'
                                             style={{ border: '1px solid #d9d9d9', borderRadius: '8px' }}
                                             type='number'
                                             value={card.code}
                                             onChange={value => { propChange(card.key, 'code', value) }}
                                         />
-                                        <div className='mt-4 pl-4 text-align-left'>
+                                        <div className='mt-1 pl-1 text-align-left'>
                                             <span className='required'>*</span>Code (lf card code can't seen or ane-code order)
                                         </div>
                                     </div>
@@ -360,7 +360,7 @@ export default function OrderComponent(props: { data: any }) {
                     <div className='submit-btn d-flex' onClick={() => calcOrder()}>
                         <div style={{ fontSize: '14rem' }}>Earn 987654321.98 Points≈987654321.98 NGN</div>
                         <Divider direction='vertical' />
-                        <div className='pr-12' onClick={() => submit()}>Submit</div>
+                        <div className='pr-3' onClick={() => submit()}>Submit</div>
                     </div>
             }
         </div>
