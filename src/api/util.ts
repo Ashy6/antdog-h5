@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import { Codes } from './code';
-import { login } from './user';
+import { HOME_PATH } from '../routes/path';
 
 // export const API_URL = 'https://www.bee456.com'
 // export const API_URL = 'https://2167d872c4.zicp.fun'
@@ -18,7 +18,7 @@ export const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(async (config: any) => {
     // 判断token是否过期
-    const token = localStorage.getItem('AntdogToken')
+    const token = localStorage.getItem('AntdogTokenH5')
     if (token) {
         config.headers.token = token
     }
@@ -40,13 +40,8 @@ instance.interceptors.response.use(
                     response.data.code
                 )
             ) {
-                // 这个项目采用接口请求返回状态码来判断路由
-                // window.location.href = LOGIN_URL
-                login({ mail: "13333623253@163.com", password: "123456" }).then(response => {
-                    if (response.data?.token) {
-                        localStorage.setItem('AntdogToken', response.data?.token);
-                    }
-                });
+                // 未登录返回首页
+                window.location.href = HOME_PATH
                 return Promise.reject();
             }
         } else {

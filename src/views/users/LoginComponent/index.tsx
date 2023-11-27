@@ -20,6 +20,7 @@ export default function LoginComponent() {
             const request = await login(values)
             // 待处理： 登录成功后，通过判断 code 跳转首页
             if (request) {
+                localStorage.setItem('AntdogTokenH5', request.data?.token)
                 navigate(HOME_PATH)
             }
         }
