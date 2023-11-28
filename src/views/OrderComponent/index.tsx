@@ -22,7 +22,8 @@ async function uploadHandle(file: File) {
     console.log(file);
     const formData = new FormData();
     formData.append('file', file);
-    await uploadFile(formData);
+    const response = await uploadFile(formData);
+    console.log('上传结果：', response.data);
     return {
         url: URL.createObjectURL(file),
     }
@@ -157,15 +158,6 @@ export default function OrderComponent(props: { data: any }) {
 
     const [receiptFileList, setReceiptFileList] = useState<ImageUploadItem[]>([]);
 
-    const menus = [
-        { key: "usd", label: "USD", url: USD, },
-        { key: "gbp", label: "GBP", url: GBP, },
-        { key: "eur", label: "EUR", url: EUR, },
-        { key: "cad", label: "CAD", url: CAD }
-    ];
-
-    const [activeMenu, setActiveMenu] = useState(menus[0].key);
-
     const propChange = (key: string, prop: keyof Card, value: string) => {
         cards.forEach(card => {
             if (card.key === key) {
@@ -184,69 +176,58 @@ export default function OrderComponent(props: { data: any }) {
         setCards(cards.filter(x => x.key !== key));
     }
 
-    /* 
-    | userId | string | 是 | 接收人 |
-    | --- | --- | --- | --- |
-    | advCode | string | 是 | 广告code |
-    | cardNo | string | 是 | 改礼品卡编号 |
-    | goodsList | Array | 是 | 卡列表 |
-    | faceValue | number | 是 | 面值 |
-    | name | string | 否 | 名称 |
-    | memo | string | 否 | 备注信息 |
-    | goodsNo | string | 否 | 卡号 |
-    | goodsPass | string | 否 | 卡密 |
-    | images | Array | 是 | 图片 |
-    */
+    const [cardNo, setCardNo] = useState('');
+
     const calcOrder = () => {
-        setCanSubmit(true);
-        // confirmOrder({
-        //     "userId": 0,
-        //     "productId": 0,
-        //     "rate": 0.00,
-        //     "goodsList": [
-        //         {
-        //             "faceValue": 20.00,
-        //             "finalAmount": 0.00,
-        //             "name": "name_c020fddea94f",
-        //             "memo": "memo_4194ad4bf40b",
-        //             "goodsNo": "goodsNo_d77b020e8e7e",
-        //             "goodsPass": "goodsPass_adc4c541d179",
-        //             "goodsType": "goodsType_99fd24edb8b7",
-        //             "images": [
-        //                 "images_f236f3bf482e"
-        //             ]
-        //         },
-        //         {
-        //             "faceValue": 20.00,
-        //             "finalAmount": 0.00,
-        //             "name": "name_c020fddea94f",
-        //             "memo": "memo_4194ad4bf40b",
-        //             "goodsNo": "goodsNo_d77b020e8e7e",
-        //             "goodsPass": "goodsPass_adc4c541d179",
-        //             "goodsType": "goodsType_99fd24edb8b7",
-        //             "images": [
-        //                 "images_f236f3bf482e"
-        //             ]
-        //         }
-        //     ],
-        //     "advCode": "Steam",
-        //     "cardNo": "1"
-        // }).then(response => {
-        //     console.log(response);
-        // });
+        confirmOrder({
+            "userId": 0,
+            "productId": 0,
+            "rate": 0.00,
+            "goodsList": [
+                {
+                    "faceValue": 20.00,
+                    "finalAmount": 0.00,
+                    "name": "name_c020fddea94f",
+                    "memo": "memo_4194ad4bf40b",
+                    "goodsNo": "goodsNo_d77b020e8e7e",
+                    "goodsPass": "goodsPass_adc4c541d179",
+                    "goodsType": "goodsType_99fd24edb8b7",
+                    "images": [
+                        "images_f236f3bf482e"
+                    ]
+                },
+                {
+                    "faceValue": 20.00,
+                    "finalAmount": 0.00,
+                    "name": "name_c020fddea94f",
+                    "memo": "memo_4194ad4bf40b",
+                    "goodsNo": "goodsNo_d77b020e8e7e",
+                    "goodsPass": "goodsPass_adc4c541d179",
+                    "goodsType": "goodsType_99fd24edb8b7",
+                    "images": [
+                        "images_f236f3bf482e"
+                    ]
+                }
+            ],
+            "advCode": "Steam",
+            "cardNo": "1"
+        }).then(response => {
+            console.log(response);
+            setCardNo(response.data.orderNo);
+            setCanSubmit(true);
+        });
     }
 
     const navigate = useNavigate();
 
     const submit = () => {
-        // submitOrder('C921198938706808832').then(response => {
-        //     console.log(response);
-        // });
-        navigate(ORDER_DETAIL_PATH);
+        submitOrder(cardNo).then(response => {
+            console.log(response);
+            navigate(ORDER_DETAIL_PATH);
+        });
     }
 
     return <div className='order full-container'>
-
         <div className='scroll-container'>
             <div className='d-flex justify-content-between  pl-3 pr-3'>
                 <div className='d-flex align-items-center'>

@@ -10,17 +10,11 @@ import { useState } from 'react';
 import { formatTime } from '../../../utils/time';
 
 import './OrderDetail.scss';
+import { agreeNegotiate, applyArbitration } from '../../../api/card';
+import { uploadFile } from '../../../api/upload';
+import InitiateArbitration from './InitiateArbitration';
 
-async function uploadHandle(file: File) {
-    console.log(file);
-    const formData = new FormData();
-    formData.append('file', file);
-    return {
-        url: URL.createObjectURL(file),
-    }
-}
-
-export function OrderDetailComponent(props: { value: AnyObject }) {
+export default function OrderDetailComponent(props: { value: AnyObject }) {
 
     const whatappUrl = 'http://baidu.com';
     const points = 1000;
@@ -34,7 +28,6 @@ export function OrderDetailComponent(props: { value: AnyObject }) {
         currency, // 币种
         createTime = '2023-11-19 22:03', // 创建时间
         //updateTime, // 更新时间
-        images, // 图片，TODO：1. 如果命名不对按接口返回的字段为主
         seller,      // 售卖人
         rate = 784.71,        // 汇率
         // cardType,
@@ -47,20 +40,21 @@ export function OrderDetailComponent(props: { value: AnyObject }) {
     const [orderStatus, setOrderStatus] = useState(status || OrderStatus.inTrade);
     const [imageList, setImageList] = useState([image1, image2, image3]);
 
-    const descriptions: { label: string; value: string }[] = [
-        { label: 'Username submit the order', value: '2023.8.15 23:29:58' },
-        { label: 'Buyer take order', value: '2023.8.15 23:29:58' },
-        { label: 'Buyer initiated negotiation', value: '2023.8.15 23:29:58' },
-        { label: 'Seller initiated arbitration', value: '2023.8.15 23:29:58' },
-        { label: 'Platform is in arbitration', value: '2023.8.15 23:29:58' },
-        { label: 'The platform ruled that the buyer was justifiedConclusion: Not USD,MXN Card,rate is lower', value: '2023.8.15 23:29:58' },
-        { label: 'Seller +10 Points', value: '2023.8.15 23:29:58' },
-        { label: 'Order Completed', value: '2023.8.15 23:29:58' },
+    const descriptions: { key: number, label: string; value: string }[] = [
+        { key: 1, label: 'Username submit the order', value: '2023.8.15 23:29:58' },
+        { key: 2, label: 'Buyer take order', value: '2023.8.15 23:29:58' },
+        { key: 3, label: 'Buyer initiated negotiation', value: '2023.8.15 23:29:58' },
+        { key: 4, label: 'Seller initiated arbitration', value: '2023.8.15 23:29:58' },
+        { key: 5, label: 'Platform is in arbitration', value: '2023.8.15 23:29:58' },
+        { key: 6, label: 'The platform ruled that the buyer was justifiedConclusion: Not USD,MXN Card,rate is lower', value: '2023.8.15 23:29:58' },
+        { key: 7, label: 'Seller +10 Points', value: '2023.8.15 23:29:58' },
+        { key: 8, label: 'Order Completed', value: '2023.8.15 23:29:58' },
     ]
 
     const [fileList, setFileList] = useState<ImageUploadItem[]>([])
 
-    const [descriptionValue, setDescriptionValue] = useState('')
+    const [descriptionValue, setDescriptionValue] = useState('');
+
 
     return <div className='order card-item'>
         <div className='d-flex justify-content-between  pl-3 pr-3'>
@@ -143,58 +137,7 @@ export function OrderDetailComponent(props: { value: AnyObject }) {
                 </Button>
             </div>}
             {orderStatus === OrderStatus.inTrade && <div className='card-item-btn p-0'>
-                <Button
-                    className='antdog-btn'
-                    color="primary"
-                    block
-                    onClick={async () => {
-                        const result = await Dialog.confirm({
-                            header: <div>Initiate Arbitration</div>,
-                            cancelText: 'Cancel',
-                            confirmText: 'Confirm',
-                            content: (
-                                <>
-                                    <div className={`d-flex justify-content-between odd mb-2 pl-2 pr-2`}>
-                                        <div>Order Number</div>
-                                        <div>{orderNo}</div>
-                                    </div>
-                                    <div className={`d-flex justify-content-between even mb-2 pl-2 pr-2`}>
-                                        <div>Order Time</div>
-                                        <div>{formatTime(createTime)}</div>
-                                    </div>
-                                    <div className={`d-flex justify-content-between odd mb-2 pl-2 pr-2`}>
-                                        <div style={{ marginRight: '12rem' }}>
-                                            <div className='desc-label mb-2'>Description</div>
-                                            <div className='uploader-wrapper'>
-                                                <ImageUploader
-                                                    value={fileList}
-                                                    onChange={setFileList}
-                                                    upload={uploadHandle}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <TextArea
-                                                value={descriptionValue}
-                                                onChange={(val) => setDescriptionValue(val)}
-                                                placeholder="Please describe the matter in detail and the platform will also question the buyer.Combine all the circumstances and make a ruling."
-                                                autoSize={{ minRows: 5, maxRows: 6 }}
-                                            />
-                                        </div>
-                                    </div>
-                                </>
-                            ),
-                        });
-                        if (result) {
-                            // todo 调协商接口
-                        } 
-                    }}
-                >
-                    Initiate Arbitration
-                </Button>
-                <Button className='antdog-btn' color='primary'>
-                    Accept Negotiation
-                </Button>
+                <InitiateArbitration setOrderStatus={setOrderStatus} orderNo={orderNo} createTime={createTime} ></InitiateArbitration>
             </div>}
 
             {/* In dispute */}
@@ -212,7 +155,7 @@ export function OrderDetailComponent(props: { value: AnyObject }) {
             </div>}
 
             {/* Completed */}
-            {orderStatus === OrderStatus.completed && <div className='card-item-btn p-0 short'>
+            {orderStatus === OrderStatus.completed && <div className='card-item-btn p-0'>
                 <Button className='antdog-btn disabled' color="primary" disabled>
                     Order Completed
                 </Button>
@@ -220,7 +163,7 @@ export function OrderDetailComponent(props: { value: AnyObject }) {
         </div>
         <div className='pl-5 pr-5 card-item-order'>
             {descriptions.map(item => {
-                return <div className='d-flex justify-content-between mb-3'>
+                return <div className='d-flex justify-content-between mb-3' key={item.key}>
                     <div className='text-align-left' style={{ maxWidth: '60%' }}>{item.label}</div>
                     <div>{item.value}</div>
                 </div>
