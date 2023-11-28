@@ -1,17 +1,32 @@
+import { useState } from 'react'
+import useTimeCount from '../../../hooks/useTimeCount'
 import { useNavigate } from 'react-router-dom'
 import { Button, Checkbox, Form, Input } from 'antd-mobile'
 import { LOGIN_PATH } from '../../../routes/path'
-import { RegisterParams, register } from '../../../api/user'
+import { RegisterParams, getMailCode, register } from '../../../api/user'
 
 import '../style.scss'
 
 export default function RegisterComponent() {
     const navigate = useNavigate()
+    const [tigger, count, tiggering] = useTimeCount(120)
+
+    const [code, setCode] = useState('');
+
+    const sendCode = () => {
+        getMailCode({ receiver: code }).then(res => {
+            if (res) {
+                tigger()
+            }
+        })
+    }
 
     const onFinish = async (values: RegisterParams) => {
+        console.log('values', values);
         if (values) {
             const request = await register(values)
-            // 待处理： 登录成功后，通过判断 code 跳转首页
+            console.log('注册', request);
+            // 注册成功后，跳转登录
             if (request) {
                 navigate(LOGIN_PATH)
             }
@@ -30,15 +45,19 @@ export default function RegisterComponent() {
                         name='email'
                         rules={[{ required: true, message: 'Please enter email address' }]}
                     >
-                        <Input placeholder='Please enter email address' clearable />
+                        <Input onChange={setCode} placeholder='Please enter email address' clearable />
                     </Form.Item>
                     <Form.Item
                         label='code'
-                        name='code'
+                        name='verifyCode'
                         rules={[
                             { required: true, message: 'Please enter verification code' }
                         ]}
-                        extra={<Button className='send-btn'>Send code</Button>}
+                        extra={
+                            <Button disabled={tiggering} className='send-btn' onClick={sendCode}>
+                                {tiggering ? `${count}s` : 'Send code'}
+                            </Button>
+                        }
                     >
                         <Input placeholder='Please enter verification code' clearable />
                     </Form.Item>
