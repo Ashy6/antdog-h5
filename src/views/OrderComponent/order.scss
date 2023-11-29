@@ -35,11 +35,43 @@
         .adm-image-uploader-cell {
             width: 96rem;
             height: 120rem;
+            font-size: 40rem;
 
             .adm-image-uploader-upload-button-icon {
                 line-height: 120rem;
                 font-size: 40rem;
                 font-weight: bold;
+                color: white;
+            }
+
+            .adm-image-uploader-cell-image {
+                width: 90rem;
+                height: 120rem;
+            }
+        }
+
+        .adm-space-horizontal>.adm-space-item {
+            margin-right: 0;
+        }
+
+        .upload-image-1 {
+            .adm-image-uploader-cell {
+                opacity: 0.7;
+                background: no-repeat center/100% url('../../assets/png/upload-bg-img-1.jpg');
+            }
+        }
+
+        .upload-image-2 {
+            .adm-image-uploader-cell {
+                opacity: 0.7;
+                background: no-repeat center/100% url('../../assets/png/upload-bg-img-2.jpg');
+            }
+        }
+
+        .upload-image-3 {
+            .adm-image-uploader-cell {
+                opacity: 0.7;
+                background: no-repeat center/100% url('../../assets/png/upload-bg-img-3.jpg');
             }
         }
     }
