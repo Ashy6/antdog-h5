@@ -1,6 +1,6 @@
 import HomeComponent from '../views/HomeComponent'
 import OrderComponent from '../views/OrderComponent'
-import { OrderDetailComponent } from '../views/OrderComponent/OrderDetailComponent'
+import OrderDetailComponent from '../views/OrderComponent/OrderDetailComponent'
 import OrderListComponent from '../views/OrderListComponent'
 import WithdrawComponent from '../views/WithdrawComponent'
 import WithdrawDetailsComponent from '../views/WithdrawDetailsComponent'

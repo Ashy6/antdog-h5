@@ -37,3 +37,18 @@ export function submitOrder(orderNo: string) {
         method: 'get',
     });
 }
+
+export function applyArbitration(data: { orderNo: string, images: string, description?: string }) {
+    return instance({
+        url: `${API_PREFIX}/order/applyArbitration`,
+        method: 'post',
+        data: data
+    });
+}
+
+export function agreeNegotiate(orderNo: string) {
+    return instance({
+        url: `${API_PREFIX}/order/agreeNegotiate?orderNo=${orderNo}`,
+        method: 'get'
+    });
+}
