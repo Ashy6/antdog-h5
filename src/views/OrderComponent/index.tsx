@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Avatar, Image, Divider, List, Card, ImageUploader, Input, Button, Space } from 'antd-mobile';
+import { useState, useEffect } from 'react';
+import { Avatar, Image, Divider, Card, ImageUploader, Input } from 'antd-mobile';
 import messageIcon from '../../assets/png/message.png';
-import USD from '../../assets/png/USD.png';
-import AUD from '../../assets/png/AUD.png';
-import CAD from '../../assets/png/CAD.png';
-import EUR from '../../assets/png/EUR.png';
-import GBP from '../../assets/png/GBP.png';
 import FlagListComponent from '../../components/FlagListComponent';
-import { AntOutline, SoundOutline, AddOutline, CloseCircleFill } from 'antd-mobile-icons'
+import { SoundOutline, AddOutline, CloseCircleFill } from 'antd-mobile-icons'
 import { ImageUploadItem } from 'antd-mobile/es/components/image-uploader'
 import { uploadFile } from '../../api/upload';
 import { confirmOrder, getCardList, submitOrder } from '../../api/card';
@@ -127,9 +122,22 @@ interface Card {
     receipt: string;
     amount: string;
     code: string;
+    cardFrontFileList: ImageUploadItem[];
+    cardBackFileList: ImageUploadItem[];
+    receiptFileList: ImageUploadItem[];
 }
 function cardFactory(): Card {
-    return { key: idCreator(), cardFrontUrl: '', cardBackUrl: '', receipt: '', amount: '', code: '' };
+    return {
+        key: idCreator(),
+        cardFrontUrl: '',
+        cardBackUrl: '',
+        receipt: '',
+        amount: '',
+        code: '',
+        cardFrontFileList: [],
+        cardBackFileList: [],
+        receiptFileList: []
+    };
 }
 
 export default function OrderComponent(props: { data: any }) {
@@ -152,13 +160,7 @@ export default function OrderComponent(props: { data: any }) {
 
     const [canSubmit, setCanSubmit] = useState(false);
 
-    const [cardFrontFileList, setCardFrontFileList] = useState<ImageUploadItem[]>([]);
-
-    const [cardBackFileList, setCardBackFileList] = useState<ImageUploadItem[]>([]);
-
-    const [receiptFileList, setReceiptFileList] = useState<ImageUploadItem[]>([]);
-
-    const propChange = (key: string, prop: keyof Card, value: string) => {
+    const propChange = (key: string, prop: keyof Card, value: any) => {
         cards.forEach(card => {
             if (card.key === key) {
                 card[prop] = value;
@@ -268,10 +270,11 @@ export default function OrderComponent(props: { data: any }) {
                                 <div className='d-flex justify-content-around mb-2'>
                                     <div>
                                         <ImageUploader
-                                            value={cardFrontFileList}
+                                            className={!card.cardFrontFileList.length ? 'upload-image-1' : ''}
+                                            value={card.cardFrontFileList}
                                             maxCount={1}
-                                            onChange={setCardFrontFileList}
-                                            upload={uploadHandle as any}
+                                            onChange={value => propChange(card.key, 'cardFrontFileList', value)}
+                                            upload={uploadHandle}
                                         />
                                         <div className='mt-1'>
                                             <span className='required'>*</span>Card Front
@@ -279,10 +282,11 @@ export default function OrderComponent(props: { data: any }) {
                                     </div>
                                     <div>
                                         <ImageUploader
-                                            value={cardBackFileList}
+                                            className={!card.cardBackFileList.length ? 'upload-image-2' : ''}
+                                            value={card.cardBackFileList}
                                             maxCount={1}
-                                            onChange={setCardBackFileList}
-                                            upload={uploadHandle as any}
+                                            onChange={value => propChange(card.key, 'cardBackFileList', value)}
+                                            upload={uploadHandle}
                                         />
                                         <div className='mt-1'>
                                             <span className='required'>*</span>Card Back
@@ -290,10 +294,11 @@ export default function OrderComponent(props: { data: any }) {
                                     </div>
                                     <div>
                                         <ImageUploader
-                                            value={receiptFileList}
+                                            className={!card.receiptFileList.length ? 'upload-image-3' : ''}
+                                            value={card.receiptFileList}
                                             maxCount={1}
-                                            onChange={setReceiptFileList}
-                                            upload={uploadHandle as any}
+                                            onChange={value => propChange(card.key, 'receiptFileList', value)}
+                                            upload={uploadHandle}
                                         />
                                         <div className='mt-1'>
                                             <span className='required'>*</span>Receipt

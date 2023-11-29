@@ -46,7 +46,7 @@ export default function InitiateArbitration(props: { orderNo: string, createTime
                                 <div style={{ marginRight: '12rem' }}>
                                     <div className='desc-label mb-2'>Description</div>
                                     {!images && <div className='uploader-wrapper'>
-                                        <ImageUploader upload={uploadHandle} />
+                                        <ImageUploader maxCount={1} upload={uploadHandle} />
                                     </div>}
                                 </div>
                                 <div>
