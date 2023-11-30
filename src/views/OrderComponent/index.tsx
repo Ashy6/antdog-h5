@@ -117,26 +117,22 @@ const flagList = [
 
 interface Card {
     key: string;
-    cardFrontUrl: string;
-    cardBackUrl: string;
-    receipt: string;
     amount: string;
     code: string;
     cardFrontFileList: ImageUploadItem[];
     cardBackFileList: ImageUploadItem[];
     receiptFileList: ImageUploadItem[];
+    finished: boolean;
 }
 function cardFactory(): Card {
     return {
         key: idCreator(),
-        cardFrontUrl: '',
-        cardBackUrl: '',
-        receipt: '',
         amount: '',
         code: '',
         cardFrontFileList: [],
         cardBackFileList: [],
-        receiptFileList: []
+        receiptFileList: [],
+        finished: false
     };
 }
 
@@ -160,13 +156,37 @@ export default function OrderComponent(props: { data: any }) {
 
     const [canSubmit, setCanSubmit] = useState(false);
 
-    const propChange = (key: string, prop: keyof Card, value: any) => {
+    const propChange = (key: string, prop: keyof (Omit<Card, "finished">), value: any) => {
+        let needCalc = false;
         cards.forEach(card => {
             if (card.key === key) {
                 card[prop] = value;
+                // 检查 key 不是 finished 的属性是否有空的（代表还没有填写的）
+                const keys = Object.keys(card).filter(x => x !== 'finished') as (keyof (Omit<Card, "finished">))[];
+                const isEmpty = (key: keyof (Omit<Card, "finished">)) => !card[key]?.length;
+                const hasEmpty = keys.some(k => isEmpty(k));
+                if (!card.finished) {
+                    if (!hasEmpty) {
+                        needCalc = true;
+                        card.finished = true;
+                    }
+                } else {
+                    if (hasEmpty) {
+                        card.finished = false;
+                        needCalc = true;
+                    }
+                }
             }
         })
         setCards([...cards]);
+        const hasFinished = cards.some(x => x.finished);
+        if (!hasFinished) {
+            setCanSubmit(false);
+        } else {
+            if (needCalc) {
+                calcOrder();
+            }
+        }
     }
 
     const addCard = () => {
@@ -181,38 +201,25 @@ export default function OrderComponent(props: { data: any }) {
     const [cardNo, setCardNo] = useState('');
 
     const calcOrder = () => {
+        const goodsList = cards.filter(x => x.finished).map(card => {
+            return {
+                faceValue: 20.00,
+                goodsNo: card.code,
+                amount: card.amount,
+                images: [
+                    /* url 是 blob:http://xxxx，所以要截掉 blob */
+                    card.cardFrontFileList[0].url.slice(5),
+                    card.cardBackFileList[0].url.slice(5),
+                    card.receiptFileList[0].url.slice(5)
+                ]
+            };
+        })
         confirmOrder({
-            "userId": 0,
-            "productId": 0,
-            "rate": 0.00,
-            "goodsList": [
-                {
-                    "faceValue": 20.00,
-                    "finalAmount": 0.00,
-                    "name": "name_c020fddea94f",
-                    "memo": "memo_4194ad4bf40b",
-                    "goodsNo": "goodsNo_d77b020e8e7e",
-                    "goodsPass": "goodsPass_adc4c541d179",
-                    "goodsType": "goodsType_99fd24edb8b7",
-                    "images": [
-                        "images_f236f3bf482e"
-                    ]
-                },
-                {
-                    "faceValue": 20.00,
-                    "finalAmount": 0.00,
-                    "name": "name_c020fddea94f",
-                    "memo": "memo_4194ad4bf40b",
-                    "goodsNo": "goodsNo_d77b020e8e7e",
-                    "goodsPass": "goodsPass_adc4c541d179",
-                    "goodsType": "goodsType_99fd24edb8b7",
-                    "images": [
-                        "images_f236f3bf482e"
-                    ]
-                }
-            ],
-            "advCode": "Steam",
-            "cardNo": "1"
+            useId: "T1",
+            advCode: "Steam",
+            cardNo: "1",
+            rate: "1",
+            goodsList
         }).then(response => {
             console.log(response);
             setCardNo(response.data.orderNo);
@@ -254,7 +261,7 @@ export default function OrderComponent(props: { data: any }) {
                 </div>
                 <div className='text-align-left'>1. Your card price auto calculate by below forms.don't waste time ask "how much?</div>
                 <div className='text-align-left'>2. Click "Send More Cards" to paste all cards once.only form can lock price</div>
-                <div className='text-align-left'>3. Chat use for interactive.Submit this form is onl way to trade.Your card redeem byAntdog intelligent machine.</div>
+                <div className='text-align-left'>3. Chat use for interactive.Submit this form is onl way to trade.Your card redeem by Antdog intelligent machine.</div>
             </div>
             <Divider />
             <FlagListComponent flagList={flagList} />

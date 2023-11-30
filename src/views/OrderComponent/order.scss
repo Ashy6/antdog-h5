@@ -31,6 +31,9 @@
     .adm-card {
         padding: 0;
         width: 100%;
+        margin: 0 10rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
 
         .adm-image-uploader-cell {
             width: 96rem;
