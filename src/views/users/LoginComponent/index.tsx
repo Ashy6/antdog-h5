@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Form, Input } from 'antd-mobile'
+import { Button, Form, Input, Toast } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -18,10 +18,19 @@ export default function LoginComponent() {
     const onFinish = async (values: LoginParams) => {
         if (values) {
             const request = await login(values)
-            // 待处理： 登录成功后，通过判断 code 跳转首页
-            if (request) {
+            if (request.code === 0) {
+                // TODO：处理全局状态存储登录信息
                 localStorage.setItem('AntdogTokenH5', request.data?.token)
+                Toast.show({
+                    icon: 'success',
+                    content: request.msg,
+                })
                 navigate(HOME_PATH)
+            } else {
+                Toast.show({
+                    icon: 'fail',
+                    content: request.msg,
+                })
             }
         }
     }
