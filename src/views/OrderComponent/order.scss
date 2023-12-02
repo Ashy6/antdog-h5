@@ -135,3 +135,34 @@
         .calc-submit-btn {}
     }
 }
+
+.verify-empty-dialog {
+    .adm-center-popup-wrap {
+        box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+        border: 0;
+
+        .adm-dialog-body {
+            background: rgba(226, 223, 223, 0.8);
+        }
+    }
+
+    .adm-mask.adm-center-popup-mask {
+        background: transparent !important;
+        transform: none !important;
+    }
+
+    .adm-dialog-content {
+        margin-bottom: 12rem;
+    }
+
+    .adm-auto-center-content {
+        text-align: center;
+        font-size: 16rem;
+        font-weight: bold;
+    }
+
+    .adm-dialog-footer .adm-dialog-action-row>.adm-dialog-button {
+        color: inherit;
+        background: linear-gradient(to bottom, #f4f4f5, #ccccd6);
+    }
+}
