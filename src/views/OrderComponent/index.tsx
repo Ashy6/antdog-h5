@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Avatar, Image, Divider, Card, ImageUploader, Input } from 'antd-mobile';
+import { Avatar, Image, Divider, Card, ImageUploader, Input, Dialog } from 'antd-mobile';
 import messageIcon from '../../assets/png/message.png';
 import FlagListComponent from '../../components/FlagListComponent';
 import { SoundOutline, AddOutline, CloseCircleFill } from 'antd-mobile-icons'
@@ -230,6 +230,15 @@ export default function OrderComponent(props: { data: any }) {
     const navigate = useNavigate();
 
     const submit = () => {
+        if (!canSubmit) {
+            Dialog.show({
+                className: 'verify-empty-dialog',
+                closeOnAction: true,
+                content: 'Please check that all required fields are correct',
+                actions: [{ key: 'ok', text: 'OK', bold: true }]
+            })
+            return;
+        }
         submitOrder(cardNo).then(response => {
             console.log(response);
             navigate(ORDER_DETAIL_PATH);
@@ -353,7 +362,7 @@ export default function OrderComponent(props: { data: any }) {
         <div className='footer'>
             {
                 !canSubmit ?
-                    <div className='submit-btn' onClick={() => calcOrder()}>
+                    <div className='submit-btn' onClick={() => submit()}>
                         Submit
                     </div> :
                     <div className='submit-btn d-flex'>
