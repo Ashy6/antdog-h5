@@ -1,10 +1,12 @@
 import { ReactElement } from 'react'
+import { useDispatch } from 'react-redux'
 import { NavBar } from 'antd-mobile'
 import { LeftOutline, UnorderedListOutline } from 'antd-mobile-icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import HeaderIcon from '../../assets/header/title-bg.png'
+import { openSideBar } from '../../store/reducers/userState'
 
+import HeaderIcon from '../../assets/header/title-bg.png'
 import { HOME_PATH } from '../../routes/path'
 import { titleMap } from './type'
 
@@ -12,17 +14,17 @@ import './style.scss'
 
 interface NavBarProps {
     children?: ReactElement
-    sideBarOpenCallback?: () => void
 }
 export default function NavBarComponent(props: NavBarProps) {
-    const { children, sideBarOpenCallback } = props
-
+    const { children } = props
+    
+    const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
 
     const onNavBarClick = () => {
         if (isHome()) {
-            sideBarOpenCallback?.()
+            dispatch(openSideBar())
         } else {
             navigate(-1)
         }

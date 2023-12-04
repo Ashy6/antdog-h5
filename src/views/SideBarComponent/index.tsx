@@ -1,18 +1,21 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Popup } from 'antd-mobile'
 import { useNavigate } from 'react-router-dom'
+
 import UserComponent from '../../components/UserComponent'
 import menuPath from '../../routes/path'
+import { closeSideBar } from '../../store/reducers/userState'
 
 import './style.scss'
 
-interface SidebarProps {
-    visible: boolean
-    sideBarCloseCallback: () => void
-}
-export default function SideBarComponent(props: SidebarProps) {
-    const { visible, sideBarCloseCallback } = props
+export default function SideBarComponent() {
+    const sidebarVisible = useSelector(
+        (store: { user: AnyObject }) => store.user.value.sidebarVisiable
+    )
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const [isLogin, setIsLogin] = useState(true)
@@ -22,9 +25,9 @@ export default function SideBarComponent(props: SidebarProps) {
     return (
         <>
             <Popup
-                visible={visible}
+                visible={sidebarVisible}
                 onMaskClick={() => {
-                    sideBarCloseCallback()
+                    dispatch(closeSideBar())
                 }}
                 position='left'
                 bodyStyle={{ width: '50vw' }}
@@ -39,13 +42,15 @@ export default function SideBarComponent(props: SidebarProps) {
                         {/* 菜单 */}
                         {menus.map((menu, i) => (
                             <div
-                                className={`sidebar-item focus-it ${menu.isActive && 'is-active'}`}
+                                className={`sidebar-item focus-it ${menu.isActive && 'is-active'
+                                    }`}
                                 key={i}
-                                onClick={() =>
+                                onClick={() => {
+                                    dispatch(closeSideBar())
                                     menu.path
                                         ? navigate(menu.path)
                                         : window.open(menu.url, '_blank')
-                                }
+                                }}
                             >
                                 {menu.label}
                             </div>
@@ -58,6 +63,7 @@ export default function SideBarComponent(props: SidebarProps) {
                                 onClick={() => {
                                     navigate(menuPath.HOME_PATH)
                                     setIsLogin(false)
+                                    dispatch(closeSideBar())
                                 }}
                             >
                                 Logout
@@ -68,7 +74,10 @@ export default function SideBarComponent(props: SidebarProps) {
                     {isLogin && (
                         <div
                             className='sidebar-container-deregister'
-                            onClick={() => navigate(menuPath.CLOSE_ACCOUNT_PATH)}
+                            onClick={() => {
+                                navigate(menuPath.CLOSE_ACCOUNT_PATH)
+                                dispatch(closeSideBar())
+                            }}
                         >
                             Deregister
                         </div>
