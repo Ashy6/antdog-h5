@@ -1,5 +1,5 @@
 
-import { Avatar, Image, Divider, Toast, Card, ImageUploader, TextArea, Button, Dialog, ImageUploadItem } from 'antd-mobile';
+import { Avatar, Image, Divider, Button, ImageUploadItem } from 'antd-mobile';
 import messageIcon from '../../../assets/png/message.png';
 import steamIcon from '../../../assets/png/steam.png';
 import image1 from '../../../assets/png/upload-bg-img-1.jpg';
@@ -10,8 +10,6 @@ import { useState } from 'react';
 import { formatTime } from '../../../utils/time';
 
 import './OrderDetail.scss';
-import { agreeNegotiate, applyArbitration } from '../../../api/card';
-import { uploadFile } from '../../../api/upload';
 import InitiateArbitration from './InitiateArbitration';
 
 export default function OrderDetailComponent(props: { value: AnyObject }) {
