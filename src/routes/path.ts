@@ -38,6 +38,10 @@ export const WITHDRAW_DEPOSIT_DETAIL_PATH = '/withdraw-deposit-detail'
  * 订单管理
  */
 export const ORDER_LIST_PATH = '/order-list'
+/**
+ * BLOG 列表页面
+ */
+export const BLOG_PATH = '/blog-list'
 
 export default {
   HOME_PATH,
@@ -49,5 +53,6 @@ export default {
   ORDER_DETAIL_PATH,
   WITHDRAW_DEPOSIT_PATH,
   WITHDRAW_DEPOSIT_DETAIL_PATH,
-  ORDER_LIST_PATH
+  ORDER_LIST_PATH,
+  BLOG_PATH
 }

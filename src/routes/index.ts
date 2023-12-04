@@ -1,3 +1,4 @@
+import BlogComponent from '../views/BlogComponent'
 import HomeComponent from '../views/HomeComponent'
 import OrderComponent from '../views/OrderComponent'
 import OrderDetailComponent from '../views/OrderComponent/OrderDetailComponent'
@@ -19,7 +20,8 @@ import {
   ORDER_PATH,
   REGISTER_PATH,
   WITHDRAW_DEPOSIT_DETAIL_PATH,
-  WITHDRAW_DEPOSIT_PATH
+  WITHDRAW_DEPOSIT_PATH,
+  BLOG_PATH
 } from './path'
 
 interface RootRoutes {
@@ -79,6 +81,11 @@ const routes: RootRoutes[] = [
     name: '订单管理',
     path: ORDER_LIST_PATH,
     Ele: OrderListComponent
+  },
+  {
+    name: 'blog 列表',
+    path: BLOG_PATH,
+    Ele: BlogComponent
   }
 ]
 

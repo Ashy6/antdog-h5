@@ -41,7 +41,11 @@ export default function SideBarComponent(props: SidebarProps) {
                             <div
                                 className={`sidebar-item focus-it ${menu.isActive && 'is-active'}`}
                                 key={i}
-                                onClick={() => navigate(menu.path)}
+                                onClick={() =>
+                                    menu.path
+                                        ? navigate(menu.path)
+                                        : window.open(menu.url, '_blank')
+                                }
                             >
                                 {menu.label}
                             </div>
@@ -88,17 +92,17 @@ export const MenusMock = [
     },
     {
         label: 'Blog',
-        path: '', // TODO： 用户点击进入博客链接
+        path: menuPath.BLOG_PATH,
         isActive: false
     },
     {
         label: 'Help',
-        path: '', // TODO： 用户点击进入帮助链接内容
+        url: 'https://m.antdog.com/article/faq.html',
         isActive: false
     },
     {
         label: 'Custormer Support',
-        path: '', // TODO：用户点击跳转 Whatsapp 客服
+        path: 'https://api.whatsapp.com/send/?phone=%2B8618227635036&text&type=phone_number&app_absent=0',
         isActive: false
     }
 ]
