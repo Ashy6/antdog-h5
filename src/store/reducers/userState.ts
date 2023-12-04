@@ -9,20 +9,26 @@ const userStateSlice = createSlice({
   initialState: {
     value: {
       sidebarVisiable: false,
+      avatar: '',
       walletNo: '',
-      balance: 0,
+      balance: 0
     }
   },
   reducers: {
-    // 更新积分 store
-    openSideBar: (state) => {
+    // 更新 SideBar 的状态
+    openSideBar: state => {
       state.value.sidebarVisiable = true
     },
-    closeSideBar: (state) => {
+    closeSideBar: state => {
       state.value.sidebarVisiable = false
+    },
+    // 用户信息
+    updateUserStore: (state, action) => {
+      state.value = { ...state.value, ...action.payload }
     }
   }
 })
 
-export const { openSideBar, closeSideBar } = userStateSlice.actions
+export const { openSideBar, closeSideBar, updateUserStore } =
+  userStateSlice.actions
 export default userStateSlice.reducer

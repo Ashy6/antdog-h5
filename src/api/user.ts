@@ -13,6 +13,19 @@ export const login = (options: LoginParams): Promise<RequestDate> => {
 }
 
 /**
+ * todo: 处理用户相关接口
+ * 用户信息积分接口
+ * @param options 
+ * @returns 
+ */
+export const getSelectBalance = (): Promise<RequestDate> => {
+  return instance({
+    url: `${API_PREFIX}/web/selectBalance`,
+    method: 'get',
+  })
+}
+
+/**
  * 验证码
  */
 export interface CodeParams {
